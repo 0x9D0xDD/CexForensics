@@ -6,15 +6,19 @@ Hard disks use magnetic platters to store data, structured into sectors. Your op
 Luckily, there is another way of purchasing dodgy old hardware. Introducing CEX.
 
 
+![Screenshot 2022-09-27 at 12 17 24](https://user-images.githubusercontent.com/83759501/192511641-1cc5f559-1ab5-48a5-9c16-ef809ea3ddfc.png)
+
 
 CEX is a UK trade-in-store where people can sell old Games, DVDs and computers. It has got a bit of a reputation of being very shady, mostly taking in stolen things for a few quid and putting a markup on it. This seemed perfect, how likely are they to properly wipe hard drives that they get through the door? After a little searching, I stumbled on an old 20Gb 2.5 inch SATA drive for the bargain price of 1 pound. The drive promptly arrived, safely packaged in an anti-static brown paper bag and envelope. 
 
-
+![Screenshot 2022-09-27 at 12 15 46](https://user-images.githubusercontent.com/83759501/192511351-85c015bf-737d-4d92-bb95-feee919693bb.png)
 
 
 I plugged the drive into my PC, and as I had anticipated the drive had been formatted. First job was to take an image of the drive, which was very straightforward to do using dd
 
+```
 dd if=/dev/sdb1 of=disk.img
+```
 
 This produced a nice 20gb image file that could be inspected. In parallel, I ran the disk through some open source tools such as (FTKImager), which identified the new partitions. A quick method of identifying files is to use a file carver like PhotoRec, it carves out known file extensions and dumps it in a fairly random order into folders. It allowed me to quickly identify the source of the drive, an Xbox 360. 
 
@@ -29,7 +33,9 @@ Many images were recovered from the drive, mostly thumbnails from the media cent
 
 Reviewing the domains list, I noted Bing.com so I constructed a grep on the disk to pull out all the searches that had been made.
 
+```
 strings /home/me/Forensics/disk.img | grep http://www.bing.com/search?
+```
 
 http://www.bing.com/search?q=123%20movies
 http://www.bing.com/search?q=xmovies8+tv&qs=AS&pq=xmov&sc=8-4&cvid=C9D98AF6450945DFA0140FA0A307C150&FORM=QBRE&sp=1
