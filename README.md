@@ -9,7 +9,7 @@ Luckily, there is another way of purchasing dodgy old hardware. Introducing CEX.
 ![Screenshot 2022-09-27 at 12 17 24](https://user-images.githubusercontent.com/83759501/192511641-1cc5f559-1ab5-48a5-9c16-ef809ea3ddfc.png)
 
 
-CEX is a UK trade-in-store where people can sell old Games, DVDs and computers. It has got a bit of a reputation of being very shady, mostly taking in stolen things for a few quid and putting a markup on it. This seemed perfect, how likely are they to properly wipe hard drives that they get through the door? After a little searching, I stumbled on an old 20Gb 2.5 inch SATA drive for the bargain price of 1 pound. The drive promptly arrived, safely packaged in an anti-static brown paper bag and envelope. 
+CEX is a UK trade-in-store where people can sell old Games, DVDs and computers. It has got a bit of a reputation of being very shady, mostly taking in stolen things for a few quid and putting a markup on it. This seemed perfect, how likely are they to properly wipe hard drives that they get through the door? After a little searching, I stumbled on an old 20Gb 2.5 inch SATA drive for the bargain price of 1 pound. The drive promptly arrived, safely packaged in an _anti-static brown paper bag_ and envelope. 
 
 ![Screenshot 2022-09-27 at 12 15 46](https://user-images.githubusercontent.com/83759501/192511351-85c015bf-737d-4d92-bb95-feee919693bb.png)
 
@@ -24,10 +24,13 @@ This produced a nice 20gb image file that could be inspected. In parallel, I ran
 
 There were many system assets, wallpapers, animations and text artifacts pointing back to Microsoft domains.
 
+```
 http://compass.xboxlive.com/assets/2c/8b/2c8b8c08-3e75-4885-a956-859766eff01c.css?n=main.css
+```
 
 Many images were recovered from the drive, mostly thumbnails from the media center functions of the xbox.
 
+![Screenshot 2022-09-27 at 12 19 47](https://user-images.githubusercontent.com/83759501/192512137-0b2fc774-8fb2-4560-a065-bddecd54bd72.png)
 
 
 
