@@ -20,9 +20,13 @@ I plugged the drive into my PC, and as I had anticipated the drive had been form
 dd if=/dev/sdb1 of=disk.img
 ```
 
-This produced a nice 20gb image file that could be inspected. In parallel, I ran the disk through some open source tools such as (FTKImager), which identified the new partitions. A quick method of identifying files is to use a file carver like PhotoRec, it carves out known file extensions and dumps it in a fairly random order into folders. It allowed me to quickly identify the source of the drive, an Xbox 360. 
+This produced a nice 20gb image file that could be inspected. In parallel, I ran the disk through some open source tools such as (FTKImager), which identified the new partitions. A quick method of identifying files is to use a file carver like PhotoRec, it carves out known file extensions and dumps it in a fairly random order into folders. 
 
-There were many system assets, wallpapers, animations and text artifacts pointing back to Microsoft domains.
+```
+$ photorec disk.img
+```
+
+From the recovered data, I quickly identified the source of the drive, an Xbox 360. There were many system assets, wallpapers, animations and text artifacts pointing back to Microsoft domains.
 
 ```
 http://compass.xboxlive.com/assets/2c/8b/2c8b8c08-3e75-4885-a956-859766eff01c.css?n=main.css
@@ -31,8 +35,6 @@ http://compass.xboxlive.com/assets/2c/8b/2c8b8c08-3e75-4885-a956-859766eff01c.cs
 Many images were recovered from the drive, mostly thumbnails from the media center functions of the xbox.
 
 ![Screenshot 2022-09-27 at 12 19 47](https://user-images.githubusercontent.com/83759501/192512137-0b2fc774-8fb2-4560-a065-bddecd54bd72.png)
-
-
 
 Reviewing the domains list, I noted Bing.com so I constructed a grep on the disk to pull out all the searches that had been made.
 
@@ -51,6 +53,25 @@ http://www.bing.com/search?q=the+grand+tour+online+free&qs=AS&pq=the+grand+tour+
 http://www.bing.com/search?q=megashare
 http://www.bing.com/search?q=putlocker&qs=AS&pq=put&sc=8-3&cvid=A16DF815A2004BF2AD3938C112CD4A37&FORM=QBRE&sp=1
 
-We can see that the owner was obviously keen on file sharing sites like put-locker.
+We can see that the owner was obviously keen on file sharing sites like put-locker. I was able to find web browsing content, including Facebook URLs and profile pictures. My next challenge was to recover the account password for the Xbox360. The account details reside in the Account Block. A full 360 reference document has been put online that provides some reverse engineering of the Xbox360 fileystem.
+
+https://www.arkem.org/xbox360-file-reference.pdf
+
+Account Block
+--------------
+
+The Account Block is a file inside a STFS archive that describes a Xbox 360 Profile. The Account Block is 404 bytes long and is encrypted with RC4 and HMAC-SHA1. The RC4 key is the first 16 bytes of the HMAC-SHA1 digest of the first 16 bytes of the Account file encrypted with the key
+E1BC159C73B1EAE9AB3170F3AD47EBF3 (TheFallen93, 2010).
+
+Very little information was available about the structure of this file and most of the following information about the decrypted Account Block has been derived from reverse engineering. It is worth emphasising that the layout and purpose of many fields of the Account Block is still unknown.
+
+I won't share the details of the user account online however using the RC4 key I was successfully able to find the original account owner details from the STFS archive.
+
+Conclusion
+=========
+
+In summary, you should _always_ encrypt your hard drives on your personal devices and where you can't you should look for the best secure destruction mechanism possible. I would advocate a sledge hammer being the best method, and quite a good stress reliever. If this isn't available, consider using a secure erase function to perform multiple passes of the drive.
+
+
 
 
